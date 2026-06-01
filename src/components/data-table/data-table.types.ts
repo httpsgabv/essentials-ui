@@ -21,6 +21,19 @@ export interface DataTableProps<TRow> extends DataTableContract<TRow>, DataTable
   selectable?: boolean;
   /** Called with the selected row ids whenever the selection changes. */
   onSelectionChange?: (selectedIds: string[]) => void;
+  /**
+   * Where to render the totals row that sums all `numeric` columns.
+   * `'top'` places it above the data rows, `'bottom'` below, `'both'` renders
+   * it in both positions.
+   */
+  totals?: 'top' | 'bottom' | 'both';
+  /** Pin the column headers so they stay visible while scrolling. */
+  stickyHeader?: boolean;
+  /**
+   * Reveal rows in batches as the user scrolls instead of paginating.
+   * The value is the number of rows per batch. Mutually exclusive with `pageSize`.
+   */
+  infiniteScroll?: number;
   /** Content shown when there are no rows (after filtering). */
   emptyMessage?: ReactNode;
   /** Escape hatch for additional class names on the root element. */

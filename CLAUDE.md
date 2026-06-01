@@ -132,19 +132,36 @@ Base UI specifics worth knowing:
   shadcn's data table uses) — _not_ a Base UI primitive, since Base UI has no
   table. shadcn/Tailwind is deliberately avoided (Tailwind preflight clashes with
   Mendix Atlas UI); we reuse only the headless engine and skin it with `eui-*`
-  classes + tokens. Features mirror shadcn's: per-column sorting, opt-in global
-  search (`searchable`), pagination (`pageSize`), and row selection (`selectable`
-  → `onSelectionChange(ids)`). Column-visibility and row-action **menus** are
-  intentionally left out (they need a Menu primitive; put actions in a custom
-  `cell` instead). The contract is generic `DataTableContract<TRow>` with flat
+  classes + tokens. The contract is generic `DataTableContract<TRow>` with flat
   `columns[].value` accessors (Mendix-attribute friendly); selection/pagination
   reuse the Base UI `Checkbox` and our own `Button`. Keep the public API
   string-based: `onSelectionChange` emits row **ids** (`getRowId`, default index).
+  - **Features (all opt-in):** per-column sorting (always on), global search
+    (`searchable` + `searchPlaceholder`), pagination (`pageSize`), row selection
+    (`selectable` → `onSelectionChange`), sticky header (`stickyHeader`), infinite
+    scroll (`infiniteScroll` = batch size, mutually exclusive with `pageSize`),
+    empty-state message (`emptyMessage`).
+  - **Numeric columns:** mark a column `numeric: true` to right-align cells and
+    include it in the totals row. Add a `format: NumericFormat` to apply
+    `groupDigits`, `prefix`, `suffix`, or `decimalPlaces` to both cells and totals.
+    `totals: 'top' | 'bottom' | 'both'` renders a sum row over the filtered rows.
+  - **Action column:** `actionColumn: DataTableActionColumn<TRow>` adds a
+    non-sortable column of per-row `DataTableAction` buttons. Each action takes a
+    Phosphor `Icon` and/or a `label` (icon-only, label-only, or both) and an
+    `onClick(row)` handler; place it at `'start'` or `'end'` (default). Column-
+    visibility and row-action **menus** are intentionally left out (they need a Menu
+    primitive; put richer UI in a custom `cell` instead).
+  - **Internal sub-components** (`DataTableToolbar`, `DataTableHeader`,
+    `DataTableBody`, `DataTableTotalsRow`, `DataTablePagination`,
+    `DataTableCheckbox`, `DataTableActionCell`) live in the same folder but are
+    **not exported** — `index.ts` only surfaces the public API.
 
 ## Per-component file layout
 
 A component is a folder under `src/components/<name>/` (kebab-case folder,
-PascalCase component). Follow the existing `button/` and `avatar/` examples:
+PascalCase component). Follow the existing `button/` and `avatar/` examples for
+simple components, or `data-table/` for complex ones that decompose into internal
+sub-components:
 
 ```
 <name>/
@@ -153,6 +170,7 @@ PascalCase component). Follow the existing `button/` and `avatar/` examples:
   <name>.variants.ts   # cva() variant definition + VariantProps type (source of truth)
   <name>.types.ts      # ComponentProps = contract + VariantProps + behaviour
   <name>.test.tsx      # Vitest + Testing Library (+ <name>.variants.test.ts)
+  <name>-*.tsx         # optional internal sub-components (not exported via index.ts)
   adapters/            # optional — *.adapter.ts mapping a source shape → contract
   index.ts             # barrel: export component + variants + contract/props/adapter
 ```

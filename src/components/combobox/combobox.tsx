@@ -9,29 +9,32 @@ import type { ComboboxProps, MultipleComboboxProps, SingleComboboxProps } from '
  * The portaled options popup. Items are pulled from the Root's `items`, so this
  * is identical for both selection modes.
  */
-function OptionList() {
+function OptionList({ options }: { options: ComboboxOption[] }) {
   return (
     <BaseCombobox.Portal>
       <BaseCombobox.Positioner className="eui-combobox__positioner" sideOffset={4}>
         <BaseCombobox.Popup className="eui-combobox__popup">
-          <BaseCombobox.Empty className="eui-combobox__empty">No results.</BaseCombobox.Empty>
-          <BaseCombobox.List className="eui-combobox__list">
-            {(option: ComboboxOption) => (
-              <BaseCombobox.Item
-                key={option.value}
-                value={option}
-                disabled={option.disabled}
-                className="eui-combobox__item"
-              >
-                <span className="eui-combobox__item-indicator" aria-hidden>
-                  <BaseCombobox.ItemIndicator>
-                    <Check weight="bold" />
-                  </BaseCombobox.ItemIndicator>
-                </span>
-                {option.label}
-              </BaseCombobox.Item>
-            )}
-          </BaseCombobox.List>
+          {options.length === 0 ? (
+            <BaseCombobox.Empty className="eui-combobox__empty">No results.</BaseCombobox.Empty>
+          ) : (
+            <BaseCombobox.List className="eui-combobox__list">
+              {(option: ComboboxOption) => (
+                <BaseCombobox.Item
+                  key={option.value}
+                  value={option}
+                  disabled={option.disabled}
+                  className="eui-combobox__item"
+                >
+                  <span className="eui-combobox__item-indicator" aria-hidden>
+                    <BaseCombobox.ItemIndicator>
+                      <Check weight="bold" />
+                    </BaseCombobox.ItemIndicator>
+                  </span>
+                  {option.label}
+                </BaseCombobox.Item>
+              )}
+            </BaseCombobox.List>
+          )}
         </BaseCombobox.Popup>
       </BaseCombobox.Positioner>
     </BaseCombobox.Portal>
@@ -63,7 +66,7 @@ function SingleCombobox({
           <CaretDown />
         </BaseCombobox.Trigger>
       </BaseCombobox.InputGroup>
-      <OptionList />
+      <OptionList options={options} />
     </BaseCombobox.Root>
   );
 }
@@ -120,7 +123,7 @@ function MultipleCombobox({
           <CaretDown />
         </BaseCombobox.Trigger>
       </BaseCombobox.InputGroup>
-      <OptionList />
+      <OptionList options={options} />
     </BaseCombobox.Root>
   );
 }

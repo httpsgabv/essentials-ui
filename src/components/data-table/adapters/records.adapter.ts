@@ -1,5 +1,5 @@
 import type { Adapter } from '@/core';
-import type { DataTableContract } from '../data-table.contract';
+import type { DataTableContract, NumericFormat } from '../data-table.contract';
 
 /** A flat record keyed by column id. */
 export type TableRecord = Record<string, string | number>;
@@ -12,7 +12,7 @@ export type TableRecord = Record<string, string | number>;
  */
 export interface RecordsTableSource {
   records: TableRecord[];
-  columns: Array<{ key: string; header: string }>;
+  columns: Array<{ key: string; header: string; numeric?: boolean; format?: NumericFormat }>;
 }
 
 /** Map flat {@link RecordsTableSource} data into the DataTable contract. */
@@ -24,5 +24,7 @@ export const recordsToDataTable: Adapter<RecordsTableSource, DataTableContract<T
     id: col.key,
     header: col.header,
     value: (row) => row[col.key],
+    numeric: col.numeric,
+    format: col.format,
   })),
 });

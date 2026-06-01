@@ -1,0 +1,54 @@
+/* Chip — `eui-chip*` classes from `chip.variants.ts` + parts. */
+
+.eui-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eui-space-1);
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-full);
+  background: var(--eui-color-surface);
+  color: var(--eui-color-fg);
+  font-family: var(--eui-font-sans);
+  font-weight: var(--eui-font-weight-medium);
+  line-height: 1;
+  cursor: pointer;
+  transition: background 120ms, border-color 120ms;
+}
+
+.eui-chip:hover:not(:disabled) {
+  background: var(--eui-color-secondary-hover);
+  border-color: var(--eui-color-secondary-hover);
+}
+
+.eui-chip:focus-visible {
+  outline: 2px solid var(--eui-color-focus-ring);
+  outline-offset: 1px;
+}
+
+.eui-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.eui-chip--sm {
+  padding: var(--eui-space-1) var(--eui-space-2);
+  font-size: var(--eui-font-size-sm);
+}
+
+.eui-chip--md {
+  padding: var(--eui-space-1) var(--eui-space-3);
+  font-size: var(--eui-font-size-md);
+}
+
+/* Icon slot */
+.eui-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.eui-chip__icon svg {
+  width: 1em;
+  height: 1em;
+}

@@ -20,9 +20,13 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'EssentialsUI',
-      fileName: 'essentials-ui',
+      entry: {
+        'essentials-ui': resolve(__dirname, 'src/index.ts'),
+        button: resolve(__dirname, 'src/components/button/index.ts'),
+        avatar: resolve(__dirname, 'src/components/avatar/index.ts'),
+        combobox: resolve(__dirname, 'src/components/combobox/index.ts'),
+        'data-table': resolve(__dirname, 'src/components/data-table/index.ts'),
+      },
       formats: ['es', 'cjs'],
     },
     rollupOptions: {

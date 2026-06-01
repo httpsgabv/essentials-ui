@@ -1,9 +1,13 @@
 {
-  "name": "@essentials/ui",
+  "name": "essentials-ui",
   "version": "0.1.0",
   "description": "Pluggable React UI components built on a base UI library, wired through per-component data contracts (ports & adapters).",
   "type": "module",
+  "private": false,
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": false,
   "files": [
     "dist"
@@ -16,6 +20,26 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/essentials-ui.js",
       "require": "./dist/essentials-ui.cjs"
+    },
+    "./button": {
+      "types": "./dist/components/button/index.d.ts",
+      "import": "./dist/button.js",
+      "require": "./dist/button.cjs"
+    },
+    "./avatar": {
+      "types": "./dist/components/avatar/index.d.ts",
+      "import": "./dist/avatar.js",
+      "require": "./dist/avatar.cjs"
+    },
+    "./combobox": {
+      "types": "./dist/components/combobox/index.d.ts",
+      "import": "./dist/combobox.js",
+      "require": "./dist/combobox.cjs"
+    },
+    "./data-table": {
+      "types": "./dist/components/data-table/index.d.ts",
+      "import": "./dist/data-table.js",
+      "require": "./dist/data-table.cjs"
     },
     "./styles.css": "./dist/styles.css"
   },

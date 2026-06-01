@@ -34,13 +34,26 @@
   border: 1px solid var(--eui-color-border);
   border-radius: var(--eui-radius-md);
 }
+.eui-datatable__scroll--infinite {
+  max-height: var(--eui-datatable-scroll-height, 20rem);
+  overflow-y: auto;
+}
+/* Sticky headers — scoped to the scroll container so they work correctly
+   for both viewport-scroll tables and bounded infinite-scroll containers. */
+.eui-datatable__scroll--sticky-header .eui-datatable__th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  /* box-shadow replaces border-bottom: sticky + border-collapse loses borders
+     in some browsers. */
+  border-bottom: 0;
+  box-shadow: inset 0 -1px 0 var(--eui-color-border);
+}
+
 .eui-datatable__table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  /* Fixed layout: column widths stay put regardless of which rows are visible,
-   * so sorting/paginating never reflows the columns. */
-  table-layout: fixed;
 }
 .eui-datatable__th {
   padding: var(--eui-space-3);
@@ -61,6 +74,17 @@
 .eui-datatable__td--select {
   width: 2.75rem;
 }
+/* Action column: shrinks to fit its buttons; nowrap prevents them from wrapping. */
+.eui-datatable__th--action,
+.eui-datatable__td--action {
+  white-space: nowrap;
+  width: 1%;
+}
+/* Numeric/currency columns: right-aligned. */
+.eui-datatable__th--numeric,
+.eui-datatable__td--numeric {
+  text-align: right;
+}
 .eui-datatable__row:last-child .eui-datatable__td {
   border-bottom: 0;
 }
@@ -74,6 +98,62 @@
   padding: var(--eui-space-4);
   text-align: center;
   color: var(--eui-color-muted);
+}
+
+/* Action column buttons. */
+.eui-datatable__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--eui-space-1);
+}
+.eui-datatable__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eui-space-1);
+  padding: var(--eui-space-1) var(--eui-space-2);
+  border: 0;
+  border-radius: var(--eui-radius-md);
+  background: transparent;
+  color: var(--eui-color-muted);
+  font: inherit;
+  font-size: var(--eui-font-size-sm);
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 120ms, color 120ms;
+}
+.eui-datatable__action-btn:hover:not(:disabled) {
+  background: var(--eui-color-ghost-hover);
+  color: var(--eui-color-fg);
+}
+.eui-datatable__action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Icon-only variant: equal padding so the button is square. */
+.eui-datatable__action-btn--icon {
+  padding: var(--eui-space-1);
+}
+.eui-datatable__action-icon {
+  display: inline-flex;
+  align-items: center;
+}
+.eui-datatable__action-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Totals row. */
+.eui-datatable__total-td {
+  background: var(--eui-color-surface);
+  font-weight: var(--eui-font-weight-medium);
+  color: var(--eui-color-fg);
+}
+.eui-datatable__total-row--top .eui-datatable__total-td {
+  border-bottom: 2px solid var(--eui-color-border);
+}
+.eui-datatable__total-row--bottom .eui-datatable__total-td {
+  border-top: 2px solid var(--eui-color-border);
 }
 
 /* Sortable header button. */
@@ -145,17 +225,20 @@
 
 /* Density variants. */
 .eui-datatable--sm .eui-datatable__th,
-.eui-datatable--sm .eui-datatable__td {
+.eui-datatable--sm .eui-datatable__td,
+.eui-datatable--sm .eui-datatable__total-td {
   padding: var(--eui-space-2);
   font-size: var(--eui-font-size-sm);
 }
 .eui-datatable--md .eui-datatable__th,
-.eui-datatable--md .eui-datatable__td {
+.eui-datatable--md .eui-datatable__td,
+.eui-datatable--md .eui-datatable__total-td {
   padding: var(--eui-space-3);
   font-size: var(--eui-font-size-md);
 }
 .eui-datatable--lg .eui-datatable__th,
-.eui-datatable--lg .eui-datatable__td {
+.eui-datatable--lg .eui-datatable__td,
+.eui-datatable--lg .eui-datatable__total-td {
   padding: var(--eui-space-4);
   font-size: var(--eui-font-size-lg);
 }

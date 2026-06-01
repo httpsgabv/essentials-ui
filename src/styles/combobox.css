@@ -144,12 +144,12 @@
 /* Popup (portaled). */
 .eui-combobox__positioner {
   z-index: 1;
+  width: var(--anchor-width);
 }
 .eui-combobox__popup {
-  min-width: 12rem;
+  width: 100%;
   max-height: 16rem;
   overflow-y: auto;
-  padding: var(--eui-space-2);
   border: 1px solid var(--eui-color-border);
   border-radius: var(--eui-radius-md);
   background: var(--eui-color-popup-bg);
@@ -170,7 +170,6 @@
   align-items: center;
   gap: var(--eui-space-2);
   padding: var(--eui-space-2) var(--eui-space-3);
-  border-radius: var(--eui-radius-md);
   color: var(--eui-color-fg);
   cursor: pointer;
   user-select: none;
