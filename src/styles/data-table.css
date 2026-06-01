@@ -1,0 +1,161 @@
+/* DataTable — `eui-datatable*` classes from `data-table.variants.ts` + parts. */
+
+.eui-datatable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eui-space-3);
+  font-family: var(--eui-font-sans);
+  color: var(--eui-color-fg);
+}
+
+/* Toolbar (search). */
+.eui-datatable__toolbar {
+  display: flex;
+}
+.eui-datatable__search {
+  box-sizing: border-box;
+  min-height: var(--eui-control-height-md);
+  min-width: 14rem;
+  padding: 0 var(--eui-space-3);
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-md);
+  background: var(--eui-color-popup-bg);
+  font: inherit;
+  color: var(--eui-color-fg);
+}
+.eui-datatable__search:focus-visible {
+  outline: 2px solid var(--eui-color-focus-ring);
+  outline-offset: 1px;
+}
+
+/* Table. */
+.eui-datatable__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-md);
+}
+.eui-datatable__table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  /* Fixed layout: column widths stay put regardless of which rows are visible,
+   * so sorting/paginating never reflows the columns. */
+  table-layout: fixed;
+}
+.eui-datatable__th {
+  padding: var(--eui-space-3);
+  border-bottom: 1px solid var(--eui-color-border);
+  background: var(--eui-color-surface);
+  color: var(--eui-color-muted);
+  font-weight: var(--eui-font-weight-medium);
+  white-space: nowrap;
+}
+.eui-datatable__td {
+  padding: var(--eui-space-3);
+  border-bottom: 1px solid var(--eui-color-border);
+  /* Wrap long values instead of overflowing the fixed-width column. */
+  overflow-wrap: anywhere;
+}
+/* Selection column: just wide enough for the checkbox. */
+.eui-datatable__th--select,
+.eui-datatable__td--select {
+  width: 2.75rem;
+}
+.eui-datatable__row:last-child .eui-datatable__td {
+  border-bottom: 0;
+}
+.eui-datatable__row:hover {
+  background: var(--eui-color-ghost-hover);
+}
+.eui-datatable__row[data-selected] {
+  background: var(--eui-color-highlight);
+}
+.eui-datatable__empty {
+  padding: var(--eui-space-4);
+  text-align: center;
+  color: var(--eui-color-muted);
+}
+
+/* Sortable header button. */
+.eui-datatable__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eui-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+}
+.eui-datatable__sort svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Selection checkbox (Base UI Checkbox). */
+.eui-datatable__checkbox {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  padding: 0;
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-md);
+  background: var(--eui-color-popup-bg);
+  color: transparent;
+  cursor: pointer;
+}
+.eui-datatable__checkbox[data-checked],
+.eui-datatable__checkbox[data-indeterminate] {
+  border-color: var(--eui-color-primary);
+  background: var(--eui-color-primary);
+  color: var(--eui-color-primary-contrast);
+}
+.eui-datatable__checkbox:focus-visible {
+  outline: 2px solid var(--eui-color-focus-ring);
+  outline-offset: 1px;
+}
+.eui-datatable__checkbox-indicator {
+  display: inline-flex;
+}
+.eui-datatable__checkbox-indicator svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+/* Pagination. */
+.eui-datatable__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--eui-space-3);
+}
+.eui-datatable__page-info {
+  color: var(--eui-color-muted);
+  font-size: var(--eui-font-size-sm);
+}
+.eui-datatable__page-controls {
+  display: flex;
+  gap: var(--eui-space-2);
+}
+
+/* Density variants. */
+.eui-datatable--sm .eui-datatable__th,
+.eui-datatable--sm .eui-datatable__td {
+  padding: var(--eui-space-2);
+  font-size: var(--eui-font-size-sm);
+}
+.eui-datatable--md .eui-datatable__th,
+.eui-datatable--md .eui-datatable__td {
+  padding: var(--eui-space-3);
+  font-size: var(--eui-font-size-md);
+}
+.eui-datatable--lg .eui-datatable__th,
+.eui-datatable--lg .eui-datatable__td {
+  padding: var(--eui-space-4);
+  font-size: var(--eui-font-size-lg);
+}

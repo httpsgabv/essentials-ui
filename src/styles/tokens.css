@@ -1,0 +1,57 @@
+/**
+ * Design tokens. Every component rule references these `--eui-*` variables and
+ * never hardcodes a value, so a consumer (e.g. a Mendix theme) can restyle the
+ * whole library by redefining these on `:root` or any ancestor scope.
+ */
+:root {
+  /* Color */
+  --eui-color-primary: #2563eb;
+  --eui-color-primary-hover: #1d4ed8;
+  --eui-color-primary-contrast: #ffffff;
+
+  --eui-color-secondary: #e2e8f0;
+  --eui-color-secondary-hover: #cbd5e1;
+  --eui-color-secondary-contrast: #0f172a;
+
+  --eui-color-ghost-hover: #f1f5f9;
+  --eui-color-fg: #0f172a;
+  --eui-color-muted: #64748b;
+  --eui-color-surface: #f1f5f9;
+  --eui-color-focus-ring: #93c5fd;
+  --eui-color-border: #cbd5e1;
+  --eui-color-popup-bg: #ffffff;
+  --eui-color-highlight: #eff6ff;
+
+  /* Radius */
+  --eui-radius-md: 0.375rem;
+  --eui-radius-full: 9999px;
+
+  /* Elevation */
+  --eui-shadow-popup: 0 4px 12px rgb(15 23 42 / 0.12);
+
+  /* Spacing */
+  --eui-space-1: 0.25rem;
+  --eui-space-2: 0.5rem;
+  --eui-space-3: 0.75rem;
+  --eui-space-4: 1rem;
+
+  /* Typography */
+  --eui-font-sans: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --eui-font-size-sm: 0.875rem;
+  --eui-font-size-md: 1rem;
+  --eui-font-size-lg: 1.125rem;
+  --eui-font-weight-medium: 500;
+
+  /* Control heights — shared baseline so inputs (e.g. Combobox) line up with
+   * the Button at each size. These mirror the Button's rendered heights. */
+  --eui-control-height-sm: 2rem;
+  --eui-control-height-md: 2.625rem;
+  --eui-control-height-lg: 3.25rem;
+
+  /* Sizing */
+  --eui-avatar-size-sm: 1.5rem;
+  --eui-avatar-size-md: 2.5rem;
+  --eui-avatar-size-lg: 4rem;
+  --eui-combobox-width: 16rem;
+  --eui-combobox-controls-width: 3.5rem;
+}

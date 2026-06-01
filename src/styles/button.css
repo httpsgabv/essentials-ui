@@ -1,0 +1,68 @@
+/* Button — classes emitted by `button.variants.ts` (CVA). */
+
+.eui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eui-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--eui-radius-md);
+  font-family: var(--eui-font-sans);
+  font-weight: var(--eui-font-weight-medium);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.eui-button:focus-visible {
+  outline: 2px solid var(--eui-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.eui-button:disabled,
+.eui-button[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Variants */
+.eui-button--primary {
+  background-color: var(--eui-color-primary);
+  color: var(--eui-color-primary-contrast);
+}
+.eui-button--primary:not(:disabled):hover {
+  background-color: var(--eui-color-primary-hover);
+}
+
+.eui-button--secondary {
+  background-color: var(--eui-color-secondary);
+  color: var(--eui-color-secondary-contrast);
+}
+.eui-button--secondary:not(:disabled):hover {
+  background-color: var(--eui-color-secondary-hover);
+}
+
+.eui-button--ghost {
+  background-color: transparent;
+  color: var(--eui-color-fg);
+}
+.eui-button--ghost:not(:disabled):hover {
+  background-color: var(--eui-color-ghost-hover);
+}
+
+/* Sizes */
+.eui-button--sm {
+  padding: var(--eui-space-2) var(--eui-space-3);
+  font-size: var(--eui-font-size-sm);
+}
+.eui-button--md {
+  padding: var(--eui-space-3) var(--eui-space-4);
+  font-size: var(--eui-font-size-md);
+}
+.eui-button--lg {
+  padding: var(--eui-space-4) calc(var(--eui-space-4) * 1.25);
+  font-size: var(--eui-font-size-lg);
+}

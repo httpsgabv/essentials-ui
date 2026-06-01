@@ -1,0 +1,39 @@
+/* Avatar — classes emitted by `avatar.variants.ts` (CVA). */
+
+.eui-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-surface);
+  color: var(--eui-color-muted);
+  font-family: var(--eui-font-sans);
+  font-weight: var(--eui-font-weight-medium);
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* The Base UI <img> fills the root when it has loaded. */
+.eui-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Sizes */
+.eui-avatar--sm {
+  width: var(--eui-avatar-size-sm);
+  height: var(--eui-avatar-size-sm);
+  font-size: var(--eui-font-size-sm);
+}
+.eui-avatar--md {
+  width: var(--eui-avatar-size-md);
+  height: var(--eui-avatar-size-md);
+  font-size: var(--eui-font-size-md);
+}
+.eui-avatar--lg {
+  width: var(--eui-avatar-size-lg);
+  height: var(--eui-avatar-size-lg);
+  font-size: var(--eui-font-size-lg);
+}

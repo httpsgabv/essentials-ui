@@ -1,0 +1,10 @@
+/**
+ * Aggregated stylesheet for @essentials/ui. Consumers import this once:
+ *   import '@essentials/ui/styles.css';
+ * The published file (`dist/styles.css`) has these @imports inlined by PostCSS.
+ */
+@import './tokens.css';
+@import './button.css';
+@import './avatar.css';
+@import './combobox.css';
+@import './data-table.css';

@@ -1,0 +1,203 @@
+/* Combobox — `eui-combobox*` classes from `combobox.variants.ts` + static parts. */
+
+/* Field wrapper (Base UI InputGroup) — carries the variant/size classes. */
+.eui-combobox {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eui-space-2);
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-md);
+  background: var(--eui-color-popup-bg);
+  font-family: var(--eui-font-sans);
+}
+.eui-combobox:focus-within {
+  outline: 2px solid var(--eui-color-focus-ring);
+  outline-offset: 1px;
+}
+.eui-combobox[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Multiple-select mode: a stable-width field whose chips wrap onto new lines
+ * instead of widening the control as selections are added. The compound
+ * selector beats the size classes' `padding` shorthand regardless of source
+ * order, so the reserved right padding below is never clobbered. */
+.eui-combobox.eui-combobox--multiple {
+  position: relative;
+  width: var(--eui-combobox-width, 16rem);
+  flex-wrap: wrap;
+  align-content: center;
+  /* Small vertical padding so a single chip row sits at the shared control
+   * height (min-height wins); extra rows then grow the field with breathing
+   * room above and below. */
+  padding-top: var(--eui-space-1);
+  padding-bottom: var(--eui-space-1);
+  /* Reserve room on the right for the pinned Clear + Trigger controls. */
+  padding-right: var(--eui-combobox-controls-width, 3.5rem);
+}
+/* Let the input shrink so it shares a row with chips (and wraps within the
+ * fixed width) rather than forcing the 12rem single-select minimum. */
+.eui-combobox--multiple .eui-combobox__input {
+  min-width: 4rem;
+}
+/* Pin the controls to the right and vertically centred so they stay put as
+ * chips wrap; lifting them out of the flex flow keeps them from being pushed
+ * around. */
+.eui-combobox--multiple .eui-combobox__clear,
+.eui-combobox--multiple .eui-combobox__trigger {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.eui-combobox--multiple .eui-combobox__trigger {
+  right: var(--eui-space-3);
+}
+.eui-combobox--multiple .eui-combobox__clear {
+  right: calc(var(--eui-space-3) + 1.5rem);
+}
+
+/* `min-height` (not `height`) so the field matches the equivalent Button size
+ * by default, yet can still grow in multiple-select mode as chips wrap. */
+.eui-combobox--sm {
+  min-height: var(--eui-control-height-sm);
+  padding: 0 var(--eui-space-2);
+  font-size: var(--eui-font-size-sm);
+}
+.eui-combobox--md {
+  min-height: var(--eui-control-height-md);
+  padding: 0 var(--eui-space-3);
+  font-size: var(--eui-font-size-md);
+}
+.eui-combobox--lg {
+  min-height: var(--eui-control-height-lg);
+  padding: 0 var(--eui-space-4);
+  font-size: var(--eui-font-size-lg);
+}
+
+.eui-combobox__input {
+  flex: 1;
+  min-width: 12rem;
+  /* No vertical padding: the field's min-height drives the height and centres
+   * the input, so it lines up with the Button at the same size. */
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--eui-color-fg);
+}
+.eui-combobox__input:focus {
+  outline: none;
+}
+
+.eui-combobox__trigger,
+.eui-combobox__clear {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--eui-color-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+.eui-combobox__trigger svg,
+.eui-combobox__clear svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Chips (multiple-select). */
+.eui-combobox__chips {
+  display: contents;
+}
+.eui-combobox__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eui-space-1);
+  padding: var(--eui-space-1) var(--eui-space-2);
+  border-radius: var(--eui-radius-md);
+  background: var(--eui-color-surface);
+  color: var(--eui-color-fg);
+  font-size: var(--eui-font-size-sm);
+  line-height: 1.4;
+}
+.eui-combobox__chip-remove {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--eui-color-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+.eui-combobox__chip-remove:hover {
+  color: var(--eui-color-fg);
+}
+.eui-combobox__chip-remove svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Popup (portaled). */
+.eui-combobox__positioner {
+  z-index: 1;
+}
+.eui-combobox__popup {
+  min-width: 12rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  padding: var(--eui-space-2);
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-md);
+  background: var(--eui-color-popup-bg);
+  box-shadow: var(--eui-shadow-popup);
+  font-family: var(--eui-font-sans);
+  /* Keep scrolling, hide the scrollbar. */
+  scrollbar-width: none;
+}
+.eui-combobox__popup::-webkit-scrollbar {
+  display: none;
+}
+.eui-combobox__list {
+  display: grid;
+  gap: 1px;
+}
+.eui-combobox__item {
+  display: flex;
+  align-items: center;
+  gap: var(--eui-space-2);
+  padding: var(--eui-space-2) var(--eui-space-3);
+  border-radius: var(--eui-radius-md);
+  color: var(--eui-color-fg);
+  cursor: pointer;
+  user-select: none;
+}
+.eui-combobox__item[data-highlighted] {
+  background: var(--eui-color-highlight);
+}
+.eui-combobox__item[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Leading slot: reserves space so labels stay aligned whether or not the item
+ * is selected; the check (Base UI ItemIndicator) only renders when selected. */
+.eui-combobox__item-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  color: var(--eui-color-primary);
+}
+.eui-combobox__item-indicator svg {
+  width: 1rem;
+  height: 1rem;
+}
+.eui-combobox__empty {
+  padding: var(--eui-space-2) var(--eui-space-3);
+  color: var(--eui-color-muted);
+}
