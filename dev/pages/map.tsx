@@ -1,5 +1,5 @@
 import 'leaflet/dist/leaflet.css';
-import { Map, Caption, ZoomControls, Summary, Legend } from '@/index';
+import { Map, Caption, ZoomControls, Summary, Legend, StatusLegend } from '@/index';
 import type { MapFeature } from '@/index';
 
 const FEATURES: MapFeature[] = [
@@ -34,6 +34,29 @@ export function MapPage() {
                   { label: 'Berlin', color: '#34d399' },
                   { label: 'Rome', color: '#fb923c' },
                 ]}
+              />
+            }
+            bottomRight={<Summary label="Total Population" attribute="value" />}
+          />
+        </div>
+      </section>
+
+      <section style={{ display: 'grid', gap: 8 }}>
+        <h2>Map — with all slots</h2>
+        <div style={{ height: 480 }}>
+          <Map
+            center={EUROPE}
+            zoom={4}
+            features={FEATURES}
+            topLeft={<Caption title="European Cities" subtitle="Population in thousands" />}
+            topRight={<ZoomControls />}
+            bottomLeft={
+              <StatusLegend
+                title='Status da meta'
+                reachedLabel='Atingida (>=100%)'
+                progressLabel='Em progresso (60-99%)'
+                belowLabel='Abaixo (<60%)'
+                sizeLabel='Tamanho = meta (Kg)'
               />
             }
             bottomRight={<Summary label="Total Population" attribute="value" />}

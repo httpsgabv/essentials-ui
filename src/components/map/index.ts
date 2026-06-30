@@ -9,3 +9,5 @@ export { Summary } from './slots/Summary';
 export type { SummaryProps } from './slots/Summary';
 export { Legend } from './slots/Legend';
 export type { LegendProps, LegendItem } from './slots/Legend';
+export { StatusLegend } from './slots/StatusLegend';
+export type { StatusLegendProps } from './slots/StatusLegend';

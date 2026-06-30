@@ -54,4 +54,21 @@
   --eui-avatar-size-lg: 4rem;
   --eui-combobox-width: 16rem;
   --eui-combobox-controls-width: 3.5rem;
+
+  /* Semantic palette */
+  --ink: #0a2540;
+  --ink-2: #3b4a66;
+  --ink-3: #6b7a93;
+  --line: #e5eaf2;
+  --line-2: #eef2f8;
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --accent: #2563eb;
+  --accent-soft: #eff4fe;
+  --ok: #3fb27f;
+  --ok-soft: #e8f6ef;
+  --warn: #e8a14a;
+  --warn-soft: #fbf1e2;
+  --bad: #d6594b;
+  --bad-soft: #fbeae7;
 }
