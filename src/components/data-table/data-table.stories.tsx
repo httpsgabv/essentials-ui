@@ -114,7 +114,7 @@ export const WithActionColumn: Story = {
 
 export const FullFeatured: Story = {
   render: () => {
-    const [selected, setSelected] = useState<string[]>([]);
+    const [_selected, setSelected] = useState<string[]>([]);
     return (
       <DataTable
         columns={COLUMNS}

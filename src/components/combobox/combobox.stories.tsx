@@ -84,7 +84,7 @@ export const Disabled: Story = {
   args: { disabled: true },
   render: (args) => (
     <div style={{ width: 280 }}>
-      <Combobox {...args} multiple={false} value="apple" />
+      <Combobox {...(args as any)} multiple={false} value="apple" />
     </div>
   ),
 };
