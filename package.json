@@ -14,35 +14,35 @@
   ],
   "main": "./dist/essentials-ui.cjs",
   "module": "./dist/essentials-ui.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/essentials-ui.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/essentials-ui.d.ts",
       "import": "./dist/essentials-ui.js",
       "require": "./dist/essentials-ui.cjs"
     },
     "./button": {
-      "types": "./dist/components/button/index.d.ts",
+      "types": "./dist/button.d.ts",
       "import": "./dist/button.js",
       "require": "./dist/button.cjs"
     },
     "./avatar": {
-      "types": "./dist/components/avatar/index.d.ts",
+      "types": "./dist/avatar.d.ts",
       "import": "./dist/avatar.js",
       "require": "./dist/avatar.cjs"
     },
     "./combobox": {
-      "types": "./dist/components/combobox/index.d.ts",
+      "types": "./dist/combobox.d.ts",
       "import": "./dist/combobox.js",
       "require": "./dist/combobox.cjs"
     },
     "./data-table": {
-      "types": "./dist/components/data-table/index.d.ts",
+      "types": "./dist/data-table.d.ts",
       "import": "./dist/data-table.js",
       "require": "./dist/data-table.cjs"
     },
     "./map": {
-      "types": "./dist/components/map/index.d.ts",
+      "types": "./dist/map.d.ts",
       "import": "./dist/map.js",
       "require": "./dist/map.cjs"
     },
@@ -51,7 +51,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build && npm run build:css",
-    "build:css": "postcss src/styles/index.css -o dist/styles.css",
+    "build:css": "postcss src/styles/index.css -o dist/styles.css && node scripts/copy-leaflet-images.mjs",
     "prepublishOnly": "npm run build",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
