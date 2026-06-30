@@ -6,6 +6,8 @@ export * from './components/avatar';
 export * from './components/combobox';
 export * from './components/data-table';
 export * from './components/chip';
+export * from './components/toggle-group';
+export * from './components/map';
 
 // Ports & adapters primitives, for projects defining their own adapters.
 export type { Adapter } from './core';

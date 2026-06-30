@@ -1,0 +1,107 @@
+/* ToggleGroup — eui-toggle-group* classes from toggle-group.variants.ts + parts. */
+
+.eui-toggle-group {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--eui-color-border);
+  border-radius: var(--eui-radius-md);
+  overflow: hidden;
+  background: var(--eui-color-surface);
+}
+
+.eui-toggle-group[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+.eui-toggle-group[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Item */
+
+.eui-toggle-group__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eui-space-2);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--eui-color-border);
+  color: var(--eui-color-fg);
+  font-family: var(--eui-font-sans);
+  font-weight: var(--eui-font-weight-medium);
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.eui-toggle-group__item:last-child {
+  border-right: none;
+}
+
+.eui-toggle-group[data-orientation='vertical'] .eui-toggle-group__item {
+  border-right: none;
+  border-bottom: 1px solid var(--eui-color-border);
+}
+
+.eui-toggle-group[data-orientation='vertical'] .eui-toggle-group__item:last-child {
+  border-bottom: none;
+}
+
+.eui-toggle-group__item:hover:not([data-disabled]) {
+  background: var(--eui-color-ghost-hover);
+}
+
+.eui-toggle-group__item:focus-visible {
+  outline: 2px solid var(--eui-color-focus-ring);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.eui-toggle-group__item[data-pressed] {
+  background: var(--eui-color-primary);
+  color: var(--eui-color-primary-contrast);
+}
+
+.eui-toggle-group__item[data-pressed]:hover:not([data-disabled]) {
+  background: var(--eui-color-primary-hover);
+}
+
+.eui-toggle-group__item[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sizes — applied via descendant selectors so size lives on the group. */
+
+.eui-toggle-group--sm .eui-toggle-group__item {
+  padding: var(--eui-space-2) var(--eui-space-3);
+  font-size: var(--eui-font-size-sm);
+}
+
+.eui-toggle-group--md .eui-toggle-group__item {
+  padding: var(--eui-space-3) var(--eui-space-4);
+  font-size: var(--eui-font-size-md);
+}
+
+.eui-toggle-group--lg .eui-toggle-group__item {
+  padding: var(--eui-space-4) calc(var(--eui-space-4) * 1.25);
+  font-size: var(--eui-font-size-lg);
+}
+
+/* Icon slot */
+
+.eui-toggle-group__item-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.eui-toggle-group__item-icon svg {
+  width: 1em;
+  height: 1em;
+}
