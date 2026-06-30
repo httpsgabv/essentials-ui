@@ -1,7 +1,9 @@
-export { Map } from './Map';
-export type { MapProps } from './Map';
-export type { MapFeature } from './types';
-export { useMapSlot } from './MapContext';
+export { Map } from './map';
+export type { MapContract, MapFeature } from './map.contract';
+export type { MapProps } from './map.types';
+export { useMapSlot } from './map-context';
+export { recordsToMap } from './adapters/records.adapter';
+export type { GeoRecord, GeoRecordsSource } from './adapters/records.adapter';
 export { Caption } from './slots/Caption';
 export type { CaptionProps } from './slots/Caption';
 export { ZoomControls } from './slots/ZoomControls';

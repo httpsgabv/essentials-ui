@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Map } from './Map';
+import { Map } from './map';
 import { Caption } from './slots/Caption';
 import { ZoomControls } from './slots/ZoomControls';
 import { Summary } from './slots/Summary';
 import { Legend } from './slots/Legend';
-import type { MapFeature } from './types';
+import type { MapFeature } from './map.contract';
 
 const SAMPLE_FEATURES: MapFeature[] = [
   { id: 1, position: [48.8566, 2.3522], label: 'Paris', value: 2161, color: '#38bdf8' },

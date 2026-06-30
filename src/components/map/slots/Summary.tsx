@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useMapSlot } from '../MapContext';
-import type { MapFeature } from '../types';
+import { useMapSlot } from '../map-context';
+import type { MapFeature } from '../map.contract';
 
 export interface SummaryProps {
   label?: string;

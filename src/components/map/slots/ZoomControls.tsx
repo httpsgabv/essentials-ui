@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useMapSlot } from '../MapContext';
+import { useMapSlot } from '../map-context';
 
 export function ZoomControls() {
   const { map } = useMapSlot();

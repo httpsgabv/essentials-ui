@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import type { Map as LeafletMap } from 'leaflet';
-import type { MapFeature } from './types';
+import type { MapFeature } from './map.contract';
 
 export interface MapContextValue {
   map: LeafletMap | null;

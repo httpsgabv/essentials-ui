@@ -1,22 +1,8 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
-import type { LatLngExpression, Map as LeafletMap } from 'leaflet';
-import { MapContext } from './MapContext';
-import type { MapFeature } from './types';
-
-export interface MapProps {
-  features?: MapFeature[];
-  center?: LatLngExpression;
-  zoom?: number;
-  minZoom?: number;
-  maxZoom?: number;
-  tileUrl?: string;
-  tileAttribution?: string;
-  topLeft?: ReactNode;
-  topRight?: ReactNode;
-  bottomLeft?: ReactNode;
-  bottomRight?: ReactNode;
-}
+import type { Map as LeafletMap } from 'leaflet';
+import { MapContext } from './map-context';
+import type { MapProps } from './map.types';
 
 const DEFAULT_TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const DEFAULT_ATTRIBUTION =
