@@ -1,14 +1,15 @@
 import { useMemo } from 'react';
-import { useMapSlot } from '../map-context';
+import { useMapSlot } from '../context';
 import type { MapFeature } from '../map.contract';
 
 export interface SummaryProps {
   label?: string;
   attribute?: keyof MapFeature;
   format?: (total: number) => string;
+  subtitle?: string;
 }
 
-export function Summary({ label = 'Total', attribute = 'value', format }: SummaryProps) {
+export function Summary({ label = 'Total', attribute = 'value', format, subtitle }: SummaryProps) {
   const { features } = useMapSlot();
 
   const { total, count } = useMemo(() => {
@@ -33,7 +34,7 @@ export function Summary({ label = 'Total', attribute = 'value', format }: Summar
       <p className="slot-summary-label">{label}</p>
       <p className="slot-summary-value">{display}</p>
       <p className="slot-summary-meta">
-        across {count} feature{count === 1 ? '' : 's'}
+        {subtitle ?? `across ${count} feature${count === 1 ? '' : 's'}`}
       </p>
     </div>
   );

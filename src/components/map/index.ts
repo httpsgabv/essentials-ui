@@ -1,7 +1,8 @@
 export { Map } from './map';
-export type { MapContract, MapFeature } from './map.contract';
+export type { MapContract, MapFeature, MapFeatureTooltipItem } from './map.contract';
 export type { MapProps } from './map.types';
-export { useMapSlot } from './map-context';
+export type { MapMarkerVariant } from './components/map-marker';
+export { useMapSlot } from './context';
 export { recordsToMap } from './adapters/records.adapter';
 export type { GeoRecord, GeoRecordsSource } from './adapters/records.adapter';
 export { Caption } from './slots/Caption';

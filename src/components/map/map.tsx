@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
+import { MapContainer, Popup, TileLayer } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
-import { MapContext } from './map-context';
+import { MapContext } from './context';
+import { MapMarker } from './components/map-marker';
 import type { MapProps } from './map.types';
 import '@/styles/tokens.css';
 import '@/styles/map.css';
+import { MapFeatureTooltip } from './components/map-tooltip';
 
 const DEFAULT_TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const DEFAULT_ATTRIBUTION =
@@ -39,25 +41,17 @@ export function Map({
           ref={setMap}
         >
           <TileLayer url={tileUrl} attribution={tileAttribution} />
-          {features.map((f) => (
-            <CircleMarker
-              key={f.id}
-              center={f.position}
-              radius={8}
-              pathOptions={{
-                color: f.color ?? '#38bdf8',
-                fillColor: f.color ?? '#38bdf8',
-                fillOpacity: 0.7,
-                weight: 2,
-              }}
-            >
-              {(f.label || f.value !== undefined) && (
-                <Tooltip>
-                  {f.label}
-                  {f.value !== undefined ? ` — ${f.value}` : ''}
-                </Tooltip>
+          {features.map((feature) => (
+            <MapMarker key={feature.id} center={feature.position} color={feature.color} variant={feature.markerVariant}>
+              {(feature.label || feature.value !== undefined || feature.tooltip?.length) && (
+                <Popup
+                  className={feature.tooltip?.length ? 'map-tooltip-popup' : undefined}
+                  closeButton={false}
+                >
+                  <MapFeatureTooltip label={feature.label} value={feature.value} items={feature.tooltip} />
+                </Popup>
               )}
-            </CircleMarker>
+            </MapMarker>
           ))}
         </MapContainer>
 

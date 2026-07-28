@@ -1,4 +1,15 @@
 import type { LatLngExpression } from 'leaflet';
+import type { MapMarkerVariant } from './components/map-marker';
+
+export interface MapFeatureTooltipItem {
+  /** Row label, e.g. "Capacidade estática". */
+  label: string;
+  /** Pre-formatted row value, e.g. "12.000 Ton" or "5.287 Ton (101%)". */
+  value: string;
+  /** Optional group key; consecutive rows sharing a group are visually clustered,
+   *  with a divider before the next group. Ungrouped rows render as one block. */
+  group?: string;
+}
 
 export interface MapFeature {
   /** Stable id, used for React keying. */
@@ -13,6 +24,11 @@ export interface MapFeature {
   value?: number;
   /** Optional marker color override (CSS color string). Defaults to the theme accent. */
   color?: string;
+  /** Optional marker shape: `'dot'` (default) is the layered-rings bubble;
+   *  `'pin'` is a classic map-pin/place icon. */
+  markerVariant?: MapMarkerVariant;
+  /** Optional structured rows shown below the label in the marker's tooltip. */
+  tooltip?: MapFeatureTooltipItem[];
 }
 
 export interface MapContract {
