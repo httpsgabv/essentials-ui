@@ -2,6 +2,8 @@ import { Button } from '@base-ui/react/button';
 import { cn } from '@/core';
 import { chipVariants } from './chip.variants';
 import type { ChipProps } from './chip.types';
+import '@/styles/tokens.css';
+import '@/styles/chip.css';
 
 /**
  * Standalone interactive chip. Wraps the Base UI `Button` primitive and maps

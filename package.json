@@ -8,9 +8,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "./dist/essentials-ui.cjs",
   "module": "./dist/essentials-ui.js",
@@ -21,15 +24,20 @@
       "import": "./dist/essentials-ui.js",
       "require": "./dist/essentials-ui.cjs"
     },
+    "./avatar": {
+      "types": "./dist/avatar.d.ts",
+      "import": "./dist/avatar.js",
+      "require": "./dist/avatar.cjs"
+    },
     "./button": {
       "types": "./dist/button.d.ts",
       "import": "./dist/button.js",
       "require": "./dist/button.cjs"
     },
-    "./avatar": {
-      "types": "./dist/avatar.d.ts",
-      "import": "./dist/avatar.js",
-      "require": "./dist/avatar.cjs"
+    "./chip": {
+      "types": "./dist/chip.d.ts",
+      "import": "./dist/chip.js",
+      "require": "./dist/chip.cjs"
     },
     "./combobox": {
       "types": "./dist/combobox.d.ts",
@@ -46,11 +54,17 @@
       "import": "./dist/map.js",
       "require": "./dist/map.cjs"
     },
+    "./toggle-group": {
+      "types": "./dist/toggle-group.d.ts",
+      "import": "./dist/toggle-group.js",
+      "require": "./dist/toggle-group.cjs"
+    },
     "./styles.css": "./dist/styles.css"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && npm run build:css",
+    "build": "npm run sync:exports && tsc --noEmit && vite build && npm run build:css",
+    "sync:exports": "node scripts/sync-exports.mjs",
     "build:css": "postcss src/styles/index.css -o dist/styles.css && node scripts/copy-leaflet-images.mjs",
     "prepublishOnly": "npm run build",
     "release:patch": "npm version patch && npm publish",
@@ -105,6 +119,7 @@
     "typescript-eslint": "^8.18.0",
     "vite": "^6.0.0",
     "vite-plugin-dts": "^4.4.0",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^3.0.0"
   },
   "dependencies": {

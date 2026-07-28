@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import { MapContext } from './map-context';
 import type { MapProps } from './map.types';
+import '@/styles/tokens.css';
+import '@/styles/map.css';
 
 const DEFAULT_TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const DEFAULT_ATTRIBUTION =

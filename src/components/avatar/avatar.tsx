@@ -2,6 +2,8 @@ import { Avatar as BaseAvatar } from '@base-ui/react/avatar';
 import { cn } from '@/core';
 import { avatarVariants } from './avatar.variants';
 import type { AvatarProps } from './avatar.types';
+import '@/styles/tokens.css';
+import '@/styles/avatar.css';
 
 /** Derive up-to-two-letter initials from a full name. */
 function initialsFromName(name: string): string {

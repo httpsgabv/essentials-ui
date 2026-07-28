@@ -8,11 +8,14 @@ per-component contracts (built for a separate Mendix widget project).
 
 ```tsx
 import { Button, Avatar, userToAvatar } from '@essentials/ui';
-import '@essentials/ui/styles.css'; // once, app-wide
 
 <Button label="Save" variant="primary" size="md" onClick={save} />;
 <Avatar {...userToAvatar(currentUser)} size="md" />;
 ```
+
+Each component's CSS loads automatically with its JS — no stylesheet import
+needed. Importing `@essentials/ui/button` pulls in only `button`'s styles (plus
+shared design tokens), not the whole library.
 
 ## Architecture: per-component contracts (ports & adapters)
 
@@ -48,8 +51,13 @@ const toContract = (p: MyWidgetProps): ButtonContract => ({
 
 Variants live in `*.variants.ts` (CVA) and emit semantic classes; styling is
 plain CSS in `src/styles/` driven by `--eui-*` design tokens. Override those CSS
-variables to theme — no Tailwind. Import the compiled stylesheet once:
-`import '@essentials/ui/styles.css'`.
+variables to theme — no Tailwind.
+
+Each component's `.tsx` side-effect-imports its own CSS file plus `tokens.css`,
+so styles load automatically with the component — nothing to import by hand. A
+consumer whose bundler doesn't process CSS-in-JS imports (or who wants every
+style loaded upfront) can still `import '@essentials/ui/styles.css'` for the
+full aggregated stylesheet.
 
 ## Scripts
 

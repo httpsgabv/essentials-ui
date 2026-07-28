@@ -23,7 +23,8 @@ upgradable independently of the Mendix wiring. See "The provider boundary" below
 
 ```bash
 npm run dev          # Vite playground (dev/) — manual visual check of components
-npm run build        # tsc --noEmit, vite build (JS + .d.ts), then build:css → dist/styles.css
+npm run build        # sync:exports, tsc --noEmit, vite build (JS + .d.ts + sourcemaps), then build:css → dist/styles.css
+npm run sync:exports # regenerates package.json's `exports` map from src/components/*/index.ts (also runs at the start of build)
 npm run build:css    # postcss src/styles/index.css → dist/styles.css (inlines @imports)
 npm test             # vitest run (one-shot)
 npm run test:watch   # vitest watch mode
@@ -73,7 +74,7 @@ it. The Mendix widget (built later, in its own repo) is exactly this:
 
 ```ts
 import { Button, type ButtonContract } from '@essentials/ui';
-import '@essentials/ui/styles.css'; // import the stylesheet once, app-wide
+// no stylesheet import needed — Button's CSS loads automatically with it
 
 const toContract = (p: MyWidgetProps): ButtonContract => ({
   label: p.caption?.value ?? '',
@@ -97,10 +98,27 @@ integrated by writing an adapter to the contract — never by changing a compone
   actual CSS lives in `src/styles/` and is driven entirely by `--eui-*` design
   tokens in `tokens.css`. A consumer (Mendix theme) restyles by overriding those
   CSS variables — no Tailwind, so nothing clashes with Atlas UI.
-- `src/styles/index.css` `@import`s the tokens + per-component CSS; `build:css`
-  inlines it into `dist/styles.css`, exposed as `@essentials/ui/styles.css`.
-  Components never import CSS in JS (keeps the JS bundle side-effect-free); the
-  consumer imports the stylesheet once.
+- Each component's own CSS lives in `src/styles/<name>.css`; shared design
+  tokens live in `src/styles/tokens.css`. Every top-level `*.tsx` (the one
+  matching a component's folder name — not internal sub-components)
+  side-effect-imports `tokens.css` and its own `<name>.css`
+  (`import '@/styles/tokens.css'; import '@/styles/<name>.css';`), so styles
+  load automatically wherever the component is imported — no manual stylesheet
+  import. `package.json`'s `sideEffects` field allowlists `**/*.css` so
+  consumer bundlers don't tree-shake these away.
+- Vite's library mode extracts CSS per output chunk but strips the `import
+  './x.css'` statements from the JS by default; `vite-plugin-lib-inject-css`
+  (in `vite.config.ts`) puts them back. `rollupOptions.output.manualChunks` in
+  the same config pins each `src/components/<name>/` tree (and `src/core/`, and
+  `tokens.css`) to its own chunk, so the emitted `dist/<name>.css` lines up
+  with `dist/<name>.js` instead of landing in an arbitrarily-named shared
+  chunk — don't remove that grouping without checking `dist/*.css` still
+  contains `tokens.css`'s contents for every entry (it's easy for tokens to
+  silently disappear from a chunk instead of merely being renamed).
+- `src/styles/index.css` still `@import`s everything, inlined by `build:css`
+  into `dist/styles.css` (exposed as `@essentials/ui/styles.css`) — a fallback
+  for consumers whose bundler doesn't process CSS-in-JS imports, or who prefer
+  loading every style upfront. It's optional now, not required.
 
 Base UI specifics worth knowing:
 
@@ -179,11 +197,16 @@ Keep the **data contract separate from presentation props**: `*.contract.ts`
 holds only what data the component needs; variants come from `*.variants.ts` and
 `onClick`/`className` live in `*.types.ts`, where
 `ComponentProps extends Contract, VariantProps`. Styles for the variant classes
-go in `src/styles/<name>.css` (tokens only) and are `@import`ed by
-`src/styles/index.css`.
+go in `src/styles/<name>.css` (tokens only); `<name>.tsx` side-effect-imports it
+(plus `tokens.css`) so it loads automatically, and `src/styles/index.css`
+`@import`s it too for the aggregate stylesheet.
 
 When adding a component, also re-export its barrel from `src/index.ts` — that is
-the package's public surface.
+the package's public surface. `vite.config.ts`'s build entries and
+`package.json`'s `exports` subpaths are both auto-discovered from
+`src/components/*/index.ts` (the latter via `npm run sync:exports`, which
+`build` runs automatically) — a new component folder with an `index.ts` gets a
+`./<name>` subpath export for free, nothing to wire up by hand.
 
 ## Conventions
 

@@ -2,6 +2,8 @@ import { Button as BaseButton } from '@base-ui/react/button';
 import { cn } from '@/core';
 import { buttonVariants } from './button.variants';
 import type { ButtonProps } from './button.types';
+import '@/styles/tokens.css';
+import '@/styles/button.css';
 
 /**
  * Pluggable button. Import it and pass props matching {@link ButtonContract}

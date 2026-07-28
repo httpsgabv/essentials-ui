@@ -4,6 +4,8 @@ import { cn } from '@/core';
 import { comboboxVariants } from './combobox.variants';
 import type { ComboboxOption } from './combobox.contract';
 import type { ComboboxProps, MultipleComboboxProps, SingleComboboxProps } from './combobox.types';
+import '@/styles/tokens.css';
+import '@/styles/combobox.css';
 
 /**
  * The portaled options popup. Items are pulled from the Root's `items`, so this

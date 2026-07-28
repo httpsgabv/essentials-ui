@@ -4,6 +4,8 @@ import { cn } from '@/core';
 import { toggleGroupVariants } from './toggle-group.variants';
 import type { ToggleGroupOption } from './toggle-group.contract';
 import type { ToggleGroupProps, SingleToggleGroupProps, MultipleToggleGroupProps } from './toggle-group.types';
+import '@/styles/tokens.css';
+import '@/styles/toggle-group.css';
 
 function ToggleItems({ options }: { options: ToggleGroupOption[] }) {
   return (

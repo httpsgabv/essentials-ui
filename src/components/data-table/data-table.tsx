@@ -18,6 +18,8 @@ import { formatNumeric } from './data-table-format';
 import { DataTableCheckbox } from './data-table-checkbox';
 import { DataTableActionCell } from './data-table-action-cell';
 import { DataTableToolbar } from './data-table-toolbar';
+import '@/styles/tokens.css';
+import '@/styles/data-table.css';
 import { DataTableHeader } from './data-table-header';
 import { DataTableBody } from './data-table-body';
 import { DataTableTotalsRow } from './data-table-totals-row';
