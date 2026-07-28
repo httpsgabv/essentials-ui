@@ -4,11 +4,25 @@ import type { MapMarkerVariant } from './components/map-marker';
 export interface MapFeatureTooltipItem {
   /** Row label, e.g. "Capacidade estática". */
   label: string;
-  /** Pre-formatted row value, e.g. "12.000 Ton" or "5.287 Ton (101%)". */
-  value: string;
+  /** Row value: either a pre-formatted string (e.g. "12.000 Ton" or "5.287 Ton
+   *  (101%)"), or a raw number — combine with `humanize`/`monetary`/`currency`
+   *  to have the tooltip format it. */
+  value: string | number;
   /** Optional group key; consecutive rows sharing a group are visually clustered,
    *  with a divider before the next group. Ungrouped rows render as one block. */
   group?: string;
+  /** Humanize a numeric `value` (e.g. `1_500_000 -> "1.5 mi"`) instead of a plain
+   *  locale number. No effect when `value` is already a pre-formatted string. */
+  humanize?: boolean;
+  /** Whether a numeric `value` represents money; when true with `humanize`, `currency`
+   *  is prefixed. No effect when `value` is already a pre-formatted string. */
+  monetary?: boolean;
+  /** Currency symbol/code to prefix, e.g. `'R$'`. Only used when `monetary` is true. */
+  currency?: string;
+  /** Unit text appended after the resolved value, e.g. `'Ton'`. Appended verbatim
+   *  regardless of whether `humanize` applies — lets a numeric `value` carry its own
+   *  unit instead of baking it into a pre-formatted string. */
+  suffix?: string;
 }
 
 export interface MapFeature {

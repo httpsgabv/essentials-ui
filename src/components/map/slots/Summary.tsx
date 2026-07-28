@@ -1,15 +1,30 @@
 import { useMemo } from 'react';
 import { useMapSlot } from '../context';
 import type { MapFeature } from '../map.contract';
+import { humanizeValue } from '@/core';
 
 export interface SummaryProps {
   label?: string;
   attribute?: keyof MapFeature;
   format?: (total: number) => string;
   subtitle?: string;
+  /** Humanize the total (e.g. `1_500_000 -> "1.5 mi"`) instead of a plain locale number. */
+  humanize?: boolean;
+  /** Whether the total represents money; when true with `humanize`, `currency` is prefixed. */
+  monetary?: boolean;
+  /** Currency symbol/code to prefix, e.g. `'R$'`. Only used when `monetary` is true. */
+  currency?: string;
 }
 
-export function Summary({ label = 'Total', attribute = 'value', format, subtitle }: SummaryProps) {
+export function Summary({
+  label = 'Total',
+  attribute = 'value',
+  format,
+  subtitle,
+  humanize = false,
+  monetary = false,
+  currency,
+}: SummaryProps) {
   const { features } = useMapSlot();
 
   const { total, count } = useMemo(() => {
@@ -27,7 +42,9 @@ export function Summary({ label = 'Total', attribute = 'value', format, subtitle
 
   const display = format
     ? format(total)
-    : total.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    : humanize
+      ? humanizeValue(total, { monetary, currency })
+      : total.toLocaleString(undefined, { maximumFractionDigits: 2 });
 
   return (
     <div className="slot-panel">
