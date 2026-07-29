@@ -1,6 +1,7 @@
 import type { Adapter } from '@/core';
 import type { LatLngExpression } from 'leaflet';
-import type { MapContract, MapFeature } from '../map.contract';
+import type { MapMarkerVariant } from '../components/map-marker';
+import type { MapContract, MapFeature, MapFeatureTooltipItem } from '../map.contract';
 
 export interface GeoRecord {
   id: string | number;
@@ -10,6 +11,8 @@ export interface GeoRecord {
   category?: string;
   value?: number;
   color?: string;
+  markerVariant?: MapMarkerVariant;
+  tooltip?: MapFeatureTooltipItem[];
 }
 
 export interface GeoRecordsSource {
@@ -27,6 +30,8 @@ export const recordsToMap: Adapter<GeoRecordsSource, MapContract> = (source) => 
       category: record.category,
       value: record.value,
       color: record.color,
+      markerVariant: record.markerVariant,
+      tooltip: record.tooltip,
     }),
   ),
   center: source.center,

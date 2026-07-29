@@ -2,16 +2,6 @@ import 'leaflet/dist/leaflet.css';
 import { Map, Caption, ZoomControls, Summary, Legend, StatusLegend } from '@/index';
 import type { MapFeature } from '@/index';
 
-const FEATURES: MapFeature[] = [
-  { id: 1, position: [48.8566, 2.3522], label: 'Paris', value: 2161, color: '#38bdf8',  markerVariant: "pin" },
-  { id: 2, position: [51.5074, -0.1278], label: 'London', value: 3975, color: '#f472b6',  markerVariant: "pin" },
-  { id: 3, position: [40.4168, -3.7038], label: 'Madrid', value: 6751, color: '#a78bfa',  markerVariant: "pin" },
-  { id: 4, position: [52.52, 13.405], label: 'Berlin', value: 1847, color: '#34d399',  markerVariant: "pin" },
-  { id: 5, position: [41.9028, 12.4964], label: 'Rome', value: 4342, color: '#fb923c', markerVariant: "pin" },
-];
-
-const EUROPE: [number, number] = [50, 10];
-
 const SILO_FEATURES: MapFeature[] = [
   {
     id: 1,
@@ -29,6 +19,16 @@ const SILO_FEATURES: MapFeature[] = [
     ],
   },
 ];
+
+const FEATURES: MapFeature[] = [
+  { id: 1, position: [48.8566, 2.3522], label: 'Paris', value: 2161, color: '#38bdf8',  markerVariant: "pin" },
+  { id: 2, position: [51.5074, -0.1278], label: 'London', value: 3975, color: '#f472b6',  markerVariant: "pin" },
+  { id: 3, position: [40.4168, -3.7038], label: 'Madrid', value: 6751, color: '#a78bfa',  markerVariant: "pin" },
+  { id: 4, position: [52.52, 13.405], label: 'Berlin', value: 1847, color: '#34d399',  markerVariant: "pin" },
+  { id: 5, position: [41.9028, 12.4964], label: 'Rome', value: 4342, color: '#fb923c', markerVariant: "pin", tooltip: SILO_FEATURES[0].tooltip },
+];
+
+const EUROPE: [number, number] = [50, 10];
 
 export function MapPage() {
   return (
