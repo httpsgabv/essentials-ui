@@ -74,7 +74,6 @@ export function MapPage() {
                 reachedLabel='Atingida (>=100%)'
                 progressLabel='Em progresso (60-99%)'
                 belowLabel='Abaixo (<60%)'
-                sizeLabel='Tamanho = meta (Kg)'
               />
             }
             bottomRight={<Summary label="Total Population" attribute="value" subtitle='de 118,5 mi Kg (meta)' />}

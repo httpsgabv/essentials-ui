@@ -146,7 +146,7 @@
   max-width: 220px;
 }
 
-.map-tooltip-title {
+.map-tooltip .map-tooltip-title {
   margin: 0 0 6px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--line-2);

@@ -11,7 +11,7 @@ export function StatusLegend({
   reachedLabel = 'Atingida (≥100%)',
   progressLabel = 'Em progresso (60–99%)',
   belowLabel = 'Abaixo (<60%)',
-  sizeLabel = 'Tamanho = meta (Kg)',
+  sizeLabel,
 }: StatusLegendProps) {
   return (
     <div className="slot-status-legend">
@@ -28,15 +28,19 @@ export function StatusLegend({
         <span className="slot-status-dot slot-status-dot--bad" />
         <span>{belowLabel}</span>
       </div>
-      <div className="slot-status-divider" />
-      <div className="slot-size-row">
-        <span className="slot-size-bubbles">
-          <span className="slot-size-bubble" style={{ width: 6, height: 6 }} />
-          <span className="slot-size-bubble" style={{ width: 10, height: 10 }} />
-          <span className="slot-size-bubble" style={{ width: 14, height: 14 }} />
-        </span>
-        <span>{sizeLabel}</span>
-      </div>
+      { sizeLabel && (
+      <>
+        <div className="slot-status-divider" />
+        <div className="slot-size-row">
+          <span className="slot-size-bubbles">
+            <span className="slot-size-bubble" style={{ width: 6, height: 6 }} />
+            <span className="slot-size-bubble" style={{ width: 10, height: 10 }} />
+            <span className="slot-size-bubble" style={{ width: 14, height: 14 }} />
+          </span>
+          <span>{sizeLabel}</span>
+        </div>
+      </>
+      )}
     </div>
   );
 }
