@@ -153,3 +153,11 @@ export const EmptyMap: Story = {
     zoom: 2,
   },
 };
+
+export const FitBounds: Story = {
+  args: {
+    features: SAMPLE_FEATURES,
+    fitBounds: true,
+    topLeft: <Caption title="European Cities" subtitle="View fits all markers" />,
+  },
+};

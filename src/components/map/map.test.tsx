@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Map as LeafletMap, type LatLngBounds } from 'leaflet';
+import { describe, expect, it, vi } from 'vitest';
 import { Map } from './map';
 import type { MapFeature } from './map.contract';
 
@@ -43,5 +44,33 @@ describe('Map', () => {
     fireEvent.click(container.querySelector('.leaflet-container')!);
 
     expect(screen.queryByText('51-VACARIA 0%')).not.toBeInTheDocument();
+  });
+
+  it('fits the view to all features when fitBounds is set, without needing a center', async () => {
+    const fitBoundsSpy = vi.spyOn(LeafletMap.prototype, 'fitBounds');
+    const features: MapFeature[] = [
+      { id: 1, position: [48.8566, 2.3522] },
+      { id: 2, position: [51.5074, -0.1278] },
+    ];
+
+    render(<Map zoom={4} features={features} fitBounds />);
+
+    await waitFor(() => expect(fitBoundsSpy).toHaveBeenCalled());
+    const bounds = fitBoundsSpy.mock.calls[0][0] as LatLngBounds;
+    expect(bounds.contains([48.8566, 2.3522])).toBe(true);
+    expect(bounds.contains([51.5074, -0.1278])).toBe(true);
+
+    fitBoundsSpy.mockRestore();
+  });
+
+  it('does not fit bounds when there are no features', async () => {
+    const fitBoundsSpy = vi.spyOn(LeafletMap.prototype, 'fitBounds');
+
+    render(<Map zoom={4} fitBounds />);
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(fitBoundsSpy).not.toHaveBeenCalled();
+
+    fitBoundsSpy.mockRestore();
   });
 });

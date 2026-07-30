@@ -37,8 +37,9 @@ export function MapPage() {
         <h2>Map — with all slots</h2>
         <div style={{ height: 480 }}>
           <Map
-            center={EUROPE}
             zoom={4}
+            fitBounds
+            padding={64}
             features={FEATURES}
             topLeft={<Caption title="European Cities" subtitle="Population in thousands" />}
             topRight={<ZoomControls />}

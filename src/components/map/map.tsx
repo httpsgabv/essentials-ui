@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MapContainer, Popup, TileLayer } from 'react-leaflet';
-import type { Map as LeafletMap } from 'leaflet';
+import { LatLngBounds, Point, type Map as LeafletMap } from 'leaflet';
 import { MapContext } from './context';
 import { MapMarker } from './components/map-marker';
 import type { MapProps } from './map.types';
@@ -18,6 +18,8 @@ export function Map({
   zoom = 2,
   minZoom = 2,
   maxZoom = 18,
+  fitBounds = false,
+  padding = 32,
   tileUrl = DEFAULT_TILE_URL,
   tileAttribution = DEFAULT_ATTRIBUTION,
   topLeft,
@@ -28,6 +30,16 @@ export function Map({
   const [map, setMap] = useState<LeafletMap | null>(null);
 
   const ctxValue = useMemo(() => ({ map, features }), [map, features]);
+
+  useEffect(() => {
+    if (!map || !fitBounds || features.length === 0) return;
+    map.fitBounds(
+      new LatLngBounds(features.map((feature) => feature.position)),
+      {
+        padding: new Point(padding, padding)
+      }
+    );
+  }, [map, fitBounds, padding, features]);
 
   return (
     <MapContext.Provider value={ctxValue}>

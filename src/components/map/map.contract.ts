@@ -48,12 +48,20 @@ export interface MapFeature {
 export interface MapContract {
   /** Points to plot. Defaults to an empty list. */
   features?: MapFeature[];
-  /** Initial map center. Defaults to `[0, 0]`. */
+  /** Initial map center. Defaults to `[0, 0]`. Ignored once `fitBounds` adjusts
+   *  the view, so it can be omitted when `fitBounds` is enabled. */
   center?: LatLngExpression;
-  /** Initial zoom level. Defaults to `2`. */
+  /** Initial zoom level. Defaults to `2`. Ignored once `fitBounds` adjusts the view. */
   zoom?: number;
   /** Minimum allowed zoom level. Defaults to `2`. */
   minZoom?: number;
   /** Maximum allowed zoom level. Defaults to `18`. */
   maxZoom?: number;
+  /** When true, the map automatically fits its viewport to contain all
+   *  `features` (via Leaflet's `fitBounds`) instead of using `center`/`zoom`.
+   *  Re-fits whenever `features` changes. Has no effect with fewer than one
+   *  feature. Defaults to `false`. */
+  fitBounds?: boolean;
+  /** fit bounds box padding */
+  padding?: number
 }
